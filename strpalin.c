@@ -1,38 +1,39 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#define SIZE 100
-int strpalin(char *str)
+#include"../hdr/header.h"
+int strpalin(char *);
+int main()
 {
-	char *temp1,*temp2;
-	int len = strlen(str);
-	temp1 = (char *)malloc(sizeof(char) * len);
-	temp2 = temp1;
-	while(len != 0) {
-		*temp1 = *(str + (len-1));
-		len--;
-		temp1++;
-	}
-	temp1 = temp2;
-	printf("temp1 %s\n",temp1);
-	while(*str != '\0' && *temp1 != '\0') {
-		if(*str == *temp1){
-			str++;
-			temp1++;
-			if(*str=='\0' && *temp1 == '\0') {
-				printf("it is a pallindrome\n");
-			}
-		} else {
-				printf("it is not a pallindrome\n");
-				break;
-		}
-	}
-
+	char *sptr;
+	sptr=(char*)malloc(sizeof(char)*MAX_SIZE);
+	printf("Enter a string:");
+	fgets(sptr,MAX_SIZE,stdin);
+	*(sptr+(strlen(sptr)-1))='\0';
+	printf("%d",strpalin(sptr));
+	return 0;
 }
-int main(void) {
-	char *str;
-	str = (char *)malloc(sizeof(char) * SIZE);
-	printf("s1:\n");
-	scanf("%s",str);
-	strpalin(str);
+int strpalin(char *p)
+{
+	char *temp;
+	temp=(char*)malloc(sizeof(char)*MAX_SIZE);
+	char *temp1=temp;
+	printf("reverse of string is: ");
+	for(int i=strlen(p)-1;i>=0;i--){
+		*temp=*(p+i);
+		//printf("%c",*temp);
+		temp++;
+//		return p;
+	}
+	temp='\0';
+	printf("%s\n",temp1);
+	printf("%s\n",p);
+	//temp=temp1;
+		for(;*temp1==*p;temp1++,p++){
+			if(*temp1=='\0'&&*p=='\0')
+			break;
+		}
+		if(*temp1=='\0'&&*p=='\0'){
+			return 1;
+		}
+		else{
+			return 0;
+		}
 }

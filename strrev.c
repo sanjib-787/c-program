@@ -1,25 +1,28 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include"../hdr/header.h"
 #include<string.h>
-#define SIZE 100
-char *strrev(char *str)
+char *strrev(char *);
+int main()
 {
-	char *temp1,*temp2;
-	int len = strlen(str);
-	temp1 = (char *)malloc(sizeof(char) * len);
-	temp2 = temp1;
-	while(len != 0) {
-		*temp1 = *(str + (len-1));
-		len--;
-		temp1++;
-	}
-	temp1 = temp2;
-	printf("%s\n",temp1);
+	char *sptr;
+	sptr=(char*)malloc(sizeof(char)*MAX_SIZE);
+	printf("Enter a string:");
+	fgets(sptr,MAX_SIZE,stdin);
+	printf("%s",strrev(sptr));
+	return 0;
 }
-int main(void) {
-	char *str;
-	str = (char *)malloc(sizeof(char) * SIZE);
-	printf("s1:\n");
-	scanf("%s",str);
-	strrev(str);
+char *strrev(char *p)
+{
+	char *temp;
+	temp=(char*)malloc(sizeof(char)*MAX_SIZE);
+	char *temp1=temp;
+	printf("reverse of string is: ");
+	for(int i=strlen(p)-1;i>=0;i--){
+		*temp=*(p+i);
+		//printf("%c",*temp);
+		temp++;
+//		return p;
+	}
+	temp='\0';
+//	printf("\n");
+	return temp1;
 }

@@ -1,41 +1,67 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#define SIZE 100
-char *strrem1(char *str1, char *str2);
+#include"../hdr/header.h"
+char *strrem(char *,const char *);
 int main(void)
-{
-	char *str1, *str2;
-	str1 = (char *)malloc(sizeof(char) * SIZE);
-	str2 = (char *)malloc(sizeof(char) * SIZE);
-	printf("enter a string:\n");
-	fgets(str1, SIZE, stdin);
-	*(str1 +(strlen(str1)-1)) = '\0';
-	printf("enter a string:\n");
-	fgets(str2, SIZE, stdin);
-	*(str2 + (strlen(str2) - 1)) = '\0';
-	strrem1(str1,str2);
+{	char *str,*sstr;
+	str=(char*)malloc(sizeof(char)*MAX_SIZE);
+	sstr=(char*)malloc(sizeof(char)*MAX_SIZE);
+	printf("Enter a string:\n");
+	fgets(str,MAX_SIZE,stdin);
+	printf("Enter a substring:\n");
+	fgets(sstr,MAX_SIZE,stdin);
+	*(str+(strlen(str)-1))='\0';
+	*(sstr+(strlen(sstr)-1))='\0';
+	strrem(str,sstr);
+	free(str);
+	free(sstr);
+	return 0;
 }
-char *strrem1(char *str1, char *str2)
+char *strrem(char *str,const char *sstr)
 {
-	int i = 0, j = 0, k = 0,flag =0, len1, len2;
-	len1 = strlen(str1);
-	len2 = strlen(str2);
-	for(i = 0; i < len1; i++){
-		k = i;
-		for(j = 0; j < len2; j++){
-			if(*(str1 + i) == *(str2 + j)) {
+	char *temp;
+	int i=0,k,j=0,found=0,ls,lss;
+	int flag=0;
+	ls=strlen(str);
+	lss=strlen(sstr);
+	for(int i=0;i<ls;i++){
+		k=i;
+		for(j=0;j<lss;j++){
+			if(*(str+i)==*(sstr+j))
 				i++;
-			}
 		}
-		flag = k - i;
-		if( flag == len2){
-			i = k;
-			for(j = i; j < len1-len2; j++ ) {
-				*(str1 + j) = *(str1 + j + len2);
+		found=i-k;
+		if(found==lss){
+			i=k;
+			for(j=i;j<(ls-lss);j++){
+				*(str+j)=*(str+j+lss);
 			}
-			*(str1+j)='\0';
+			ls=ls-lss;
+			*(str+j)='\0';
 		}
 	}
-	printf("%s\n",str1);
+	printf("%s",str);
+	/*for(int i=0;str[i]!='\0';i++){
+		k=i;
+		printf("%c\n",*str);
+		while(str[i]==sstr[j]){
+			i++;
+			j++;
+			if(j==strlen(sstr)){
+				printf("sstr is%s\n",sstr);
+				flag=1;
+				break;
+			}
+		}
+		j=0;
+	
+		if(flag==0){
+			i=k;
+		}
+		else{
+			flag=0;
+		}
+		temp[n++]=str[i];
+	}
+	temp='\0';
+	printf("%s",temp);*/
+	return str;
 }

@@ -1,38 +1,33 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#define SIZE 100
-char *strinchar(char *str, char ch, int pos);
+#include"../hdr/header.h"
+char *strinschar(char *, const char ,int );
 int main(void)
 {
-	char *str,ch;
+	char *cptr,c;
 	int pos;
-	str = (char *) malloc(sizeof(char) * SIZE);
-	printf("enter a string:\n");
-	fgets(str, SIZE, stdin);
-	*(str + (strlen(str) - 1 )) = '\0';
-	printf("enter a char:\n");
-	scanf("%c",&ch);
-	getchar();
-	printf("enter a number:\n");
+	cptr=(char *)malloc(sizeof(char)*MAX_SIZE);
+	printf("enter a string :\n");
+	fgets(cptr,MAX_SIZE,stdin);
+	printf("enter a character:\n");
+	scanf("%c",&c);
+	printf("enter position:\n");
 	scanf("%d",&pos);
-	strinchar(str, ch, pos);
+	strinschar(cptr,c,pos);
+	return 0;
 }
-char *strinchar(char *str, char ch, int pos)
+char *strinschar(char *str, const char c,int pos)
 {
-	char *temp, ch1;
-	int len = strlen(str);
-	temp = str;
-	int i = len - 1;
-	while( *(str + i)) {
-		*(str + len ) = *(str + i);
-		if( i == pos){
-			*(str + i) = ch;
-			break;
+	char *temp;
+	temp=(char *)malloc(sizeof(char)*MAX_SIZE);
+	int count=0;
+	while(*(str+count)!='\0'){
+		for(count=0;count<pos;count++){
+			*(temp+count)=*(str+count);
 		}
-		len--;
-		i--;
-	}
-	printf("%s\n",temp);
-}
+		*(temp+pos)=c;
+		for(count=pos;count<strlen(str);count++){
+			*(temp+count+1)=*(str+count);
+		}
 
+	}
+	printf("%s",temp);
+}

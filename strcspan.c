@@ -18,7 +18,6 @@ int strcspan(const char *s1, const char *s2 ) {
 		s2 = temp;
 		s1++;
 	}
-	return count;
 }
 int main(void)
 {
